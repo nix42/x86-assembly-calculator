@@ -1,15 +1,15 @@
 segment .data
 	
-	input1 db 'Enter a number', 0xA,0xD
+	input1 db 'Enter a number',0xA,0xD
 	len1 equ $- input1
 
-	input2 db 'Enter a second number', 0xA,0xD
+	input2 db 'Enter a second number',0xA,0xD
 	len2 equ $- input2
 	
-	choice db 'add(0), subtract(1), divide(2) or  multiply(3)', 0xA,0xD
+	choice db 'add(0), subtract(1), divide(2) or  multiply(3)',0xA,0xD
 	lenC equ $- choice
 
-	output db 'output is ', 0xA, 0xD
+	output db 'output is ',0xA,0xD
 	len3 equ $- output
 
 segment .bss
@@ -31,7 +31,7 @@ _start:
 	mov eax, 3
 	mov ebx, 0
 	mov ecx, num1
-	mov edx, 2
+	mov edx, 4
 	int 0x80
 
 	mov eax, 4
@@ -43,7 +43,7 @@ _start:
 	mov eax, 3
 	mov ebx, 0
 	mov ecx, num2
-	mov edx, 2
+	mov edx, 4
 	int 0x80
 	
 	mov eax, 4
@@ -80,8 +80,6 @@ sum_values:
 
 	add al, bl
 	add al, '0'
-	
-	mov [res], al
 
 	mov eax, 4
 	mov ebx, 1
@@ -156,4 +154,3 @@ exit:
 	mov eax, 1
 	mov ebx, 0
 	int 0x80
-

@@ -67,6 +67,8 @@ _start:
 	JE sub_values
 	cmp ah, 2
 	JE divide_values
+	cmp ah, 3
+	JE multiply_values
 	int 0x80
 
 sum_values:
@@ -122,6 +124,26 @@ divide_values:
 	
 	mov [res], ax
 	
+	mov eax, 4
+	mov ebx, 1
+	mov ecx, res
+	mov edx, 2
+	int 0x80
+	
+	jmp exit
+
+multiply_values:
+	mov al, [num1]
+	sub al, '0'
+
+	mov bl, [num2]
+	sub bl, '0'
+	
+	mul bl
+	add al, '0'
+
+	mov [res], al
+
 	mov eax, 4
 	mov ebx, 1
 	mov ecx, res

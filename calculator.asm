@@ -6,7 +6,7 @@ segment .data
 	input2 db 'Enter a second number', 0xA,0xD
 	len2 equ $- input2
 	
-	choice db 'add(0) or subtract(1)', 0xA,0xD
+	choice db 'add(0), subtract(1), divide(2) or  multiply(3)', 0xA,0xD
 	lenC equ $- choice
 
 	output db 'output is ', 0xA, 0xD
@@ -65,6 +65,8 @@ _start:
 	JE sum_values
 	cmp ah, 1
 	JE sub_values
+	cmp ah, 2
+	JE divide_values
 	int 0x80
 
 sum_values:
@@ -106,6 +108,28 @@ sub_values:
 	int 0x80
 	
 	jmp exit
+
+divide_values:
+	mov ah, 0
+	mov al, [num1]
+	sub al, '0'
+	
+	mov bl, [num2]
+	sub bl, '0'
+	
+	div bl
+	add ax, '0'
+	
+	mov [res], ax
+	
+	mov eax, 4
+	mov ebx, 1
+	mov ecx, res
+	mov edx, 2
+	int 0x80
+	
+	jmp exit
+
 exit:
 	mov eax, 1
 	mov ebx, 0

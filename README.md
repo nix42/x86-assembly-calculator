@@ -16,4 +16,6 @@ NASM x86 assembly calculator
 2. ld -m elf_i386 -s -o calc calculator.o
 3. ./calc
 
+## notes
 
+- Currently only outputs single digit, need to implement a way to convert each digit in the register to ASCII

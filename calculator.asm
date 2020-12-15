@@ -19,6 +19,7 @@ segment .bss
 	res resb 2
 
 section .text
+	extern printFunction
 	global _start
 
 _start:
@@ -101,11 +102,8 @@ sub_values:
 	
 	mov [res], al
 	
-	mov eax, 4
-	mov ebx, 1
-	mov ecx, res
-	mov edx, 2
-	int 0x80
+	push res
+	call printf
 	
 	jmp exit
 
